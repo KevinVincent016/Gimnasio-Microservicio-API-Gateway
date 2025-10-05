@@ -1,0 +1,43 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: gateway
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/gimnasio
+
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      routes:
+        - id: trainers-service
+          uri: lb://trainers-service
+          predicates:
+            - Path=/trainers/**
+        - id: classes-service
+          uri: lb://classes-service
+          predicates:
+            - Path=/classes/**
+        - id: members-service
+          uri: lb://members-service
+          predicates:
+            - Path=/members/**
+        - id: equipment-service
+          uri: lb://equipment-service
+          predicates:
+            - Path=/equipment/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty: DEBUG
