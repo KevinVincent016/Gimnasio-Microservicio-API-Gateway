@@ -12,25 +12,31 @@ spring:
 
   main:
     allow-bean-definition-overriding: true
-  cloud:
-    gateway:
-      routes:
-        - id: trainers-service
-          uri: lb://trainers-service
-          predicates:
-            - Path=/trainers/**
-        - id: classes-service
-          uri: lb://classes-service
-          predicates:
-            - Path=/classes/**
-        - id: members-service
-          uri: lb://members-service
-          predicates:
-            - Path=/members/**
-        - id: equipment-service
-          uri: lb://equipment-service
-          predicates:
-            - Path=/equipment/**
+ # cloud:
+ #   gateway:
+ #     routes:
+ #       - id: trainers-service
+ #         uri: lb://trainers-service
+ #         predicates:
+ #           - Path=/trainers/**
+ #       - id: classes-service
+ #         uri: lb://classes-service
+ #         predicates:
+ #           - Path=/classes/**
+ #       - id: members-service
+ #         uri: lb://members-service
+ #         predicates:
+ #           - Path=/members/**
+ #        - id: equipment-service
+ #         uri: lb://equipment-service
+ #         predicates:
+ #           - Path=/equipment/**
+        # - id: resumen-miembro
+        #   uri: no://op
+        #   predicates:
+        #     - Path=/resumen-miembro/**
+        #   filters:
+        #     - name: AggregationFilter
 
 eureka:
   client:

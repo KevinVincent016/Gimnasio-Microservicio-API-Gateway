@@ -39,10 +39,12 @@ public class GatewayConfig {
                         .uri("lb://members-service"))
                 .route("equipment-service", r -> r.path("/equipment/**")
                         .uri("lb://equipment-service"))
+                .route("resumen-miembro", r -> r.path("/resumen-miembro/**")
+                        .filters(f -> f.filter(aggregationFilter))
+                        .uri("no://op"))
                 .route("aggregated-info", r -> r.path("/aggregated-info")
                         .filters(f -> f.filter(aggregationFilter))
                         .uri("no://op"))
                 .build();
-
     }
 }
