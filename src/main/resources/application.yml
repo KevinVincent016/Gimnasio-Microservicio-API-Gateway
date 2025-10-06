@@ -12,38 +12,41 @@ spring:
 
   main:
     allow-bean-definition-overriding: true
- # cloud:
- #   gateway:
- #     routes:
- #       - id: trainers-service
- #         uri: lb://trainers-service
- #         predicates:
- #           - Path=/trainers/**
- #       - id: classes-service
- #         uri: lb://classes-service
- #         predicates:
- #           - Path=/classes/**
- #       - id: members-service
- #         uri: lb://members-service
- #         predicates:
- #           - Path=/members/**
- #        - id: equipment-service
- #         uri: lb://equipment-service
- #         predicates:
- #           - Path=/equipment/**
-        # - id: resumen-miembro
-        #   uri: no://op
-        #   predicates:
-        #     - Path=/resumen-miembro/**
-        #   filters:
-        #     - name: AggregationFilter
+  cloud:
+    gateway:
+      routes:
+        - id: trainers-service
+          uri: lb://trainers-service
+          predicates:
+            - Path=/api/trainers/**
+        - id: classes-service
+          uri: lb://classes-service
+          predicates:
+            - Path=/api/classes/**
+        - id: members-service
+          uri: lb://members-service
+          predicates:
+            - Path=/api/members/**
+        - id: equipment-service
+          uri: lb://equipment-service
+          predicates:
+            - Path=/api/equipment/**
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 
+keycloak:
+  auth-server-url: http://localhost:8080/auth
+  realm: gimnasio
+  resource: gimnasio-apigateway
+  public-client: false
+  credentials:
+    secret: Lm7VLnhAQ9l6xk6c9LAlaVVSAFzNxRYy
+
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: DEBUG
     reactor.netty: DEBUG
