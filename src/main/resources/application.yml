@@ -18,26 +18,35 @@ spring:
         - id: trainers-service
           uri: lb://trainers-service
           predicates:
-            - Path=/trainers/**
+            - Path=/api/trainers/**
         - id: classes-service
           uri: lb://classes-service
           predicates:
-            - Path=/classes/**
+            - Path=/api/classes/**
         - id: members-service
           uri: lb://members-service
           predicates:
-            - Path=/members/**
+            - Path=/api/members/**
         - id: equipment-service
           uri: lb://equipment-service
           predicates:
-            - Path=/equipment/**
+            - Path=/api/equipment/**
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 
+keycloak:
+  auth-server-url: http://localhost:8080/auth
+  realm: gimnasio
+  resource: gimnasio-apigateway
+  public-client: false
+  credentials:
+    secret: Lm7VLnhAQ9l6xk6c9LAlaVVSAFzNxRYy
+
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: DEBUG
     reactor.netty: DEBUG
